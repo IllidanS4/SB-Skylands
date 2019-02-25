@@ -5,6 +5,7 @@ description: The SB-Skylands Generator for 1.13
 author: Jenkins
 authors: ['Other Authors of SkylandsPlus','sirati97','Sleaker']
 load: startup
+api-version: 1.13
 commands:
     debug-multicore-generation:
         description: 'prints out debug information of the multicore genertor'

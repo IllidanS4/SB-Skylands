@@ -1,10 +1,7 @@
 package uk.co.jacekk.bukkit.skylandsplus.generation;
 
 import de.sirati97.sb.skylands.BiomesUtil;
-import net.minecraft.server.v1_13_R2.BlockPosition;
-import net.minecraft.server.v1_13_R2.Blocks;
-import net.minecraft.server.v1_13_R2.WorldGenLakes;
-import net.minecraft.server.v1_13_R2.WorldGenReed;
+import net.minecraft.server.v1_13_R2.*;
 import org.bukkit.Chunk;
 import org.bukkit.craftbukkit.v1_13_R2.CraftWorld;
 import org.bukkit.generator.BlockPopulator;
@@ -33,13 +30,16 @@ public class LakePopulator
                 int y = world.getHighestBlockYAt(x, z) + 2;
                 BlockPosition pos = new BlockPosition(x, y, z);
                 if (this.random.nextInt(100) < 85 + offset) {
-                    WorldGenLakes wgl = new WorldGenLakes(Blocks.WATER);
-                    wgl.generate(mcWorld, this.random, pos);
+                    WorldGenLakes wgl = new WorldGenLakes();
+                    //todo add config cave
+                    wgl.generate(null, ((WorldServer) mcWorld).getChunkProviderServer().chunkGenerator, this.random, pos, null);
+                    //todo add config cave
                     WorldGenReed wgr = new WorldGenReed();
-                    wgr.generate(mcWorld, this.random, pos);
+                    wgr.generate(null, ((WorldServer) mcWorld).getChunkProviderServer().chunkGenerator, this.random, pos, null);
                 } else {
-                    WorldGenLakes wgl = new WorldGenLakes(Blocks.LAVA);
-                    wgl.generate(mcWorld, this.random, pos);
+                    //todo add config cave
+                    WorldGenLakes wgl = new WorldGenLakes();
+                    wgl.generate(null, ((WorldServer) mcWorld).getChunkProviderServer().chunkGenerator, this.random, pos, null);
                 }
             }
         }

@@ -1,11 +1,6 @@
 package de.sirati97.sb.skylands.gen.pop.nms;
 
-import net.minecraft.server.v1_13_R2.BlockPosition;
-import net.minecraft.server.v1_13_R2.Blocks;
-import net.minecraft.server.v1_13_R2.EnumDirection;
-import net.minecraft.server.v1_13_R2.Material;
-import net.minecraft.server.v1_13_R2.World;
-import net.minecraft.server.v1_13_R2.WorldGenerator;
+import net.minecraft.server.v1_13_R2.*;
 
 import java.util.Random;
 
@@ -14,22 +9,22 @@ import java.util.Random;
  */
 public class WorldGenSkyGlowstone extends WorldGenerator {
 
-    public boolean generate(World var1, Random var2, BlockPosition var3) {
-        if(!var1.isEmpty(var3)) {
+    public boolean generate(GeneratorAccess generatorAccess, ChunkGenerator chunkGenerator, Random var2, BlockPosition var3, WorldGenFeatureConfiguration worldGenFeatureConfiguration) {
+        if(!chunkGenerator.getWorld().isEmpty(var3)) {
             return false;
         } else {
-            var1.setTypeAndData(var3, Blocks.GLOWSTONE.getBlockData(), 2);
+            chunkGenerator.getWorld().setTypeAndData(var3, Blocks.GLOWSTONE.getBlockData(), 2);
 
             for(int var4 = 0; var4 < 1300; ++var4) {
                 BlockPosition var5 = var3.a(var2.nextInt(8) - var2.nextInt(8), -var2.nextInt(12), var2.nextInt(8) - var2.nextInt(8));
-                if(var1.getType(var5).getMaterial() == Material.AIR) {
+                if(chunkGenerator.getWorld().getType(var5).getMaterial() == Material.AIR) {
                     int var6 = 0;
                     EnumDirection[] var7 = EnumDirection.values();
                     int var8 = var7.length;
 
                     for(int var9 = 0; var9 < var8; ++var9) {
                         EnumDirection var10 = var7[var9];
-                        if(var1.getType(var5.shift(var10)).getBlock() == Blocks.GLOWSTONE) {
+                        if(chunkGenerator.getWorld().getType(var5.shift(var10)).getBlock() == Blocks.GLOWSTONE) {
                             ++var6;
                         }
 
@@ -39,7 +34,7 @@ public class WorldGenSkyGlowstone extends WorldGenerator {
                     }
 
                     if(var6 == 1) {
-                        var1.setTypeAndData(var5, Blocks.GLOWSTONE.getBlockData(), 2);
+                        chunkGenerator.getWorld().setTypeAndData(var5, Blocks.GLOWSTONE.getBlockData(), 2);
                     }
                 }
             }
@@ -47,4 +42,5 @@ public class WorldGenSkyGlowstone extends WorldGenerator {
             return true;
         }
     }
+
 }
